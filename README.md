@@ -9,6 +9,7 @@ It's able of download, extract and move only necessary files to `/bin` to fix th
 
 ## Usage
 
+A compelete guide has been posted [here](https://askubuntu.com/a/906675/264781) at askubuntu.  
 You shoud first do a `chroot` into your broken system.  
 Then simply run the script with root access, it will create a list of all packages which has any file in /bin directory and lists their files for you.
 
