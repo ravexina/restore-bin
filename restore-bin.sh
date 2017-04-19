@@ -34,28 +34,18 @@ function create_list(){
 	# Create a temp file to hold a list of packages related to /bin directory
 	tmp=`mktemp`
 
-	# Get a list of installed packages
-	dpkg --get-selections | cut -f1 -d $'\t' | while read -r pkg;
+	# Get a list of installed packages which got file in /bin
+	dpkg -S "/bin" | cut -f1 -d: | tr "," "\n" | while read -r pkg;
 	do
-
-	 # Skip the checking of library packages
-	 if [[ $pkg == lib* ]]
-	  then
-		continue
-	 fi
-
-	 # Get a list of files within the packages which belogns to the /bin
-	 files=`dpkg --listfiles $pkg | awk '$0 ~ "^/bin/"'`
-
-	 # If there was any file from this package installed in /bin
-	 # then print the package name and its related files to /bin
-	 if [ ! -z "$files" ] 
-	 then
-	  echo -e "\033[1;31m$pkg\n \033[0m" # Package name
-	  echo -e "\033[0;33mfiles:\n\033[1;30m$files \033[0m" # Files from this packages installed in /bin
-	  echo -e "\033[1;34m- - - - \033[0m \n" # Seperator
-	  echo "$pkg " >> $tmp # Append package name to our temp list
-	 fi
+	# Get a list of files within the packages which belogns to the /bin
+	files=`dpkg --listfiles "$pkg" | grep "^/bin/"`
+ 
+	# Print out package details
+	echo -e "\033[1;31m$pkg\n \033[0m" # Package name
+	echo -e "\033[0;33mfiles:\n\033[1;30m$files \033[0m" # Files from this packages installed in /bin
+	echo -e "\033[1;34m- - - - \033[0m \n" # Seperator
+	echo "$pkg " >> $tmp # Append package name to our temp list
+	
 	done;
 }
 
