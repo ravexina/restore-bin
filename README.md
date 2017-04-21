@@ -13,7 +13,7 @@ It's able of download, extract and move only necessary files into `/bin` to fix 
 
 A compelete guide has been posted [here](https://askubuntu.com/a/906675/264781) at AskUbuntu, which describes how to `chroot` and use script to fix the issue.
 
-You shoud first `chroot` into your broken system. Then simply run the script with root access, it will create a list of all packages which has any file in /bin directory and lists their files for you.
+You shoud first `chroot` into your broken system. Then simply run the script, it will create a list of all packages which has any file in /bin directory and lists their files for you.
 
 ![restore /bin](https://raw.githubusercontent.com/ravexina/restore-bin/master/screenshots/list.png)
 
