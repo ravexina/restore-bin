@@ -111,3 +111,5 @@ case "$func" in
 esac
 
 echo "Done"
+
+exit 0
